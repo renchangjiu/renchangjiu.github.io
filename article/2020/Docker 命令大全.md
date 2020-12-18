@@ -241,16 +241,14 @@ OPTIONS说明：
 
 
 
-```
-runoob@runoob:~$ docker exec -it mynginx /bin/sh /root/runoob.sh
-http://www.runoob.com/
+```bash
+# docker exec -it mynginx /bin/sh /root/runoob.sh
 ```
 
 在容器 mynginx 中开启一个交互模式的终端:
 
-```
-runoob@runoob:~$ docker exec -i -t  mynginx /bin/bash
-root@b1a0703e41e7:/#
+```bash
+# docker exec -i -t  mynginx /bin/bash
 ```
 
 也可以通过 **docker ps -a** 命令查看已经在运行的容器，然后使用容器 ID 进入容器。
