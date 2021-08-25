@@ -1,2 +1,2 @@
 # renchangjiu.github.io
-My Github pages
+My Github Pages
