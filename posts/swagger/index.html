@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready text-sm lg:text-base"
+  style="--bg: #faf6f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Swagger教程 - My Docs</title>
+
+  
+  <meta name="theme-color" />
+  
+  <meta name="description" content="Swagger使用和注释 一、介绍 Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。
+作用
+接口文档在线自动生成 功能测试 Swagger是一组开源项目，其中主要要项目如下：
+Swagger-tools:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。 Swagger-core: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF&hellip;)、Servlets和Play框架进行集成。 Swagger-js: 用于JavaScript的Swagger实现。 Swagger-node-express: Swagger模块，用于node.js的Express web应用框架。 Swagger-ui：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。 Swagger-codegen：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。 二、使用 在Spring中集成Swagger会使用到springfox-swagger，它对Spring和Swagger的使用进行了整合。
+&lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; Spring中配置Swagger
+/** * Swagger2配置类 * 在与spring boot集成时，放在与Application.java同级的目录下。 * 或者通过 @Import 导入配置 */ @Configuration @EnableSwagger2 public class Swagger2 { /** * 创建API应用 * apiInfo() 增加API相关信息 * 通过select()函数返回一个ApiSelectorBuilder实例,用来控制哪些接口暴露给Swagger来展现， * 本例采用指定扫描的包路径来定义指定要建立API的目录。 * @return */ @Bean public Docket createRestApi() { return new Docket(DocumentationType." />
+  <meta
+    name="author"
+    content=""
+  />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost/main.min.css" />
+
+  
+  <script
+    defer
+    src="http://localhost/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+     
+  <link rel="preload" as="image" href="http://localhost/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://deno.land/logo.svg" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="http://localhost/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost/github.svg" />
+  
+
+  
+  <link rel="icon" href="http://localhost/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.108.0">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Swagger教程" />
+<meta property="og:description" content="Swagger使用和注释 一、介绍 Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。
+作用
+接口文档在线自动生成 功能测试 Swagger是一组开源项目，其中主要要项目如下：
+Swagger-tools:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。 Swagger-core: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF&hellip;)、Servlets和Play框架进行集成。 Swagger-js: 用于JavaScript的Swagger实现。 Swagger-node-express: Swagger模块，用于node.js的Express web应用框架。 Swagger-ui：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。 Swagger-codegen：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。 二、使用 在Spring中集成Swagger会使用到springfox-swagger，它对Spring和Swagger的使用进行了整合。
+&lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; Spring中配置Swagger
+/** * Swagger2配置类 * 在与spring boot集成时，放在与Application.java同级的目录下。 * 或者通过 @Import 导入配置 */ @Configuration @EnableSwagger2 public class Swagger2 { /** * 创建API应用 * apiInfo() 增加API相关信息 * 通过select()函数返回一个ApiSelectorBuilder实例,用来控制哪些接口暴露给Swagger来展现， * 本例采用指定扫描的包路径来定义指定要建立API的目录。 * @return */ @Bean public Docket createRestApi() { return new Docket(DocumentationType." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost/posts/swagger/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-08T14:16:10+08:00" />
+<meta property="article:modified_time" content="2022-12-08T14:16:10+08:00" />
+
+  
+  <meta itemprop="name" content="Swagger教程">
+<meta itemprop="description" content="Swagger使用和注释 一、介绍 Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。
+作用
+接口文档在线自动生成 功能测试 Swagger是一组开源项目，其中主要要项目如下：
+Swagger-tools:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。 Swagger-core: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF&hellip;)、Servlets和Play框架进行集成。 Swagger-js: 用于JavaScript的Swagger实现。 Swagger-node-express: Swagger模块，用于node.js的Express web应用框架。 Swagger-ui：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。 Swagger-codegen：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。 二、使用 在Spring中集成Swagger会使用到springfox-swagger，它对Spring和Swagger的使用进行了整合。
+&lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; Spring中配置Swagger
+/** * Swagger2配置类 * 在与spring boot集成时，放在与Application.java同级的目录下。 * 或者通过 @Import 导入配置 */ @Configuration @EnableSwagger2 public class Swagger2 { /** * 创建API应用 * apiInfo() 增加API相关信息 * 通过select()函数返回一个ApiSelectorBuilder实例,用来控制哪些接口暴露给Swagger来展现， * 本例采用指定扫描的包路径来定义指定要建立API的目录。 * @return */ @Bean public Docket createRestApi() { return new Docket(DocumentationType."><meta itemprop="datePublished" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="dateModified" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="wordCount" content="509">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Swagger教程"/>
+<meta name="twitter:description" content="Swagger使用和注释 一、介绍 Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。
+作用
+接口文档在线自动生成 功能测试 Swagger是一组开源项目，其中主要要项目如下：
+Swagger-tools:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。 Swagger-core: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF&hellip;)、Servlets和Play框架进行集成。 Swagger-js: 用于JavaScript的Swagger实现。 Swagger-node-express: Swagger模块，用于node.js的Express web应用框架。 Swagger-ui：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。 Swagger-codegen：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。 二、使用 在Spring中集成Swagger会使用到springfox-swagger，它对Spring和Swagger的使用进行了整合。
+&lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt; &lt;version&gt;${springfox.swagger.version}&lt;/version&gt; &lt;/dependency&gt; Spring中配置Swagger
+/** * Swagger2配置类 * 在与spring boot集成时，放在与Application.java同级的目录下。 * 或者通过 @Import 导入配置 */ @Configuration @EnableSwagger2 public class Swagger2 { /** * 创建API应用 * apiInfo() 增加API相关信息 * 通过select()函数返回一个ApiSelectorBuilder实例,用来控制哪些接口暴露给Swagger来展现， * 本例采用指定扫描的包路径来定义指定要建立API的目录。 * @return */ @Bean public Docket createRestApi() { return new Docket(DocumentationType."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
+      href="http://localhost/"
+      >My Docs</a
+    >
+    <a
+      class="btn-dark ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+    ></a>
+  </div>
+
+  <a
+    class="btn-menu relative z-50 -mr-8 flex h-[5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+  ></a>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = `"#faf6f1"`.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:mt-0 lg:ml-12 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href=" https://twitter.com/dsumuzhe "
+        target="_blank"
+      ></a>
+      
+      <a
+        class="h-8 w-8 [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href=" https://github.com/renchangjiu "
+        target="_blank"
+      ></a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-10rem)] max-w-3xl px-8 pt-20 pb-32 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-20">
+    <h1 class="!my-0 pb-2.5">Swagger教程</h1>
+
+    
+    <div class="text-sm opacity-60">
+      
+      <time>Dec 8, 2022</time>
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="swagger使用和注释">Swagger使用和注释</h1>
+<h2 id="一介绍">一、介绍</h2>
+<p>Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。</p>
+<p><strong>作用</strong></p>
+<ul>
+<li>接口文档在线自动生成</li>
+<li>功能测试</li>
+</ul>
+<p><strong>Swagger是一组开源项目，其中主要要项目如下：</strong></p>
+<ul>
+<li><strong>Swagger-tools</strong>:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。</li>
+<li><strong>Swagger-core</strong>: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF&hellip;)、Servlets和Play框架进行集成。</li>
+<li><strong>Swagger-js</strong>: 用于JavaScript的Swagger实现。</li>
+<li><strong>Swagger-node-express</strong>: Swagger模块，用于node.js的Express web应用框架。</li>
+<li><strong>Swagger-ui</strong>：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。</li>
+<li><strong>Swagger-codegen</strong>：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。</li>
+</ul>
+<h2 id="二使用">二、使用</h2>
+<p>在Spring中集成Swagger会使用到<code>springfox-swagger</code>，它对Spring和Swagger的使用进行了整合。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>io.springfox<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>springfox-swagger2<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>${springfox.swagger.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>io.springfox<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>springfox-swagger-ui<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>${springfox.swagger.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>Spring中配置Swagger</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Swagger2配置类
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 在与spring boot集成时，放在与Application.java同级的目录下。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 或者通过 @Import 导入配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableSwagger2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Swagger2</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 创建API应用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * apiInfo() 增加API相关信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 通过select()函数返回一个ApiSelectorBuilder实例,用来控制哪些接口暴露给Swagger来展现，
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 本例采用指定扫描的包路径来定义指定要建立API的目录。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Docket <span style="color:#a6e22e">createRestApi</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Docket<span style="color:#f92672">(</span>DocumentationType<span style="color:#f92672">.</span><span style="color:#a6e22e">SWAGGER_2</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">apiInfo</span><span style="color:#f92672">(</span>apiInfo<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">select</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">apis</span><span style="color:#f92672">(</span>RequestHandlerSelectors<span style="color:#f92672">.</span><span style="color:#a6e22e">basePackage</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.turbo.demo.controller&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">paths</span><span style="color:#f92672">(</span>PathSelectors<span style="color:#f92672">.</span><span style="color:#a6e22e">any</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 创建该API的基本信息（这些基本信息会展现在文档页面中）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 访问地址：http://项目实际地址/swagger-ui.html
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ApiInfo <span style="color:#a6e22e">apiInfo</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ApiInfoBuilder<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">title</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Spring Boot中使用Swagger2构建RESTful APIs&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">description</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">termsOfServiceUrl</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">contact</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;zou&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;zouxq412@foxmail.com&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">version</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="api注解">API注解</h3>
+<h4 id="1api">1、@Api</h4>
+<p>用在类上，该注解将一个Controller（Class）标注为一个swagger资源（API）。在默认情况下，Swagger-Core只会扫描解析具有@Api注解的类，而会自动忽略其他类别资源（JAX-RS endpoints，Servlets等等）的注解。该注解包含以下几个重要属性</p>
+<ul>
+<li>tags API分组标签。具有相同标签的API将会被归并在一组内展示。</li>
+<li>value 如果tags没有定义，value将作为Api的tags使用</li>
+<li>description API的详细描述，在1.5.X版本之后不再使用，<strong>但实际发现在2.0.0版本中仍然可以使用</strong></li>
+</ul>
+<h4 id="2apioperation">2、@ApiOperation</h4>
+<p>在指定的（路由）路径上，对一个操作或HTTP方法进行描述。具有相同路径的不同操作会被归组为同一个操作对象。不同的HTTP请求方法及路径组合构成一个唯一操作。此注解的属性有：</p>
+<ul>
+<li>value 对操作的简单说明，长度为120个字母，60个汉字。</li>
+<li>notes 对操作的详细说明。</li>
+<li>httpMethod HTTP请求的动作名，可选值有：&ldquo;GET&rdquo;, &ldquo;HEAD&rdquo;, &ldquo;POST&rdquo;, &ldquo;PUT&rdquo;, &ldquo;DELETE&rdquo;, &ldquo;OPTIONS&rdquo; and &ldquo;PATCH&rdquo;。</li>
+<li>code 默认为200，有效值必须符合标准的<a href="https://link.jianshu.com/?t=http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP Status Code Definitions</a>。</li>
+</ul>
+<h4 id="3apiimplicitparams">3、@ApiImplicitParams</h4>
+<p>用在方法上，注解ApiImplicitParam的容器类，以数组方式存储。</p>
+<h4 id="4apiimplicitparam">4、@ApiImplicitParam</h4>
+<p>对API的单一参数进行注解。虽然注解@ApiParam同JAX-RS参数相绑定，但这个@ApiImplicitParam注解可以以统一的方式定义参数列表，也是在Servelet及非JAX-RS环境下，唯一的方式参数定义方式。注意这个注解@ApiImplicitParam必须被包含在注解@ApiImplicitParams之内。可以设置以下重要参数属性：</p>
+<ul>
+<li>name 参数名称</li>
+<li>value 参数的简短描述</li>
+<li>required 是否为必传参数</li>
+<li>dataType 参数类型，可以为类名，也可以为基本类型（String，int、boolean等）</li>
+<li>paramType 参数的传入（请求）类型，可选的值有path, query, body, header or form。</li>
+</ul>
+<h4 id="5apiparam">5、@ApiParam</h4>
+<p>增加对参数的元信息说明。这个注解只能被使用在JAX-RS 1.x/2.x的综合环境下。其主要的属性有</p>
+<ul>
+<li>required 是否为必传参数，默认为false</li>
+<li>value 参数简短说明</li>
+</ul>
+<h4 id="6apiresponses">6、@ApiResponses</h4>
+<p>注解@ApiResponse的包装类，数组结构。即使需要使用一个@ApiResponse注解，也需要将@ApiResponse注解包含在注解@ApiResponses内。</p>
+<h4 id="7apiresponse">7、@ApiResponse</h4>
+<p>描述一个操作可能的返回结果。当REST API请求发生时，这个注解可用于描述所有可能的成功与错误码。可以用，也可以不用这个注解去描述操作的返回类型，但成功操作的返回类型必须在@ApiOperation中定义。如果API具有不同的返回类型，那么需要分别定义返回值，并将返回类型进行关联。但Swagger不支持同一返回码，多种返回类型的注解。注意：这个注解必须被包含在@ApiResponses注解中。</p>
+<ul>
+<li>code HTTP请求返回码。有效值必须符合标准的<a href="https://link.jianshu.com/?t=http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP Status Code Definitions</a>。</li>
+<li>message 更加易于理解的文本消息</li>
+<li>response 返回类型信息，必须使用完全限定类名，比如“com.xyz.cc.Person.class”。</li>
+<li>responseContainer 如果返回类型为容器类型，可以设置相应的值。有效值为 &ldquo;List&rdquo;, &ldquo;Set&rdquo; or &ldquo;Map&rdquo;，其他任何无效的值都会被忽略。</li>
+</ul>
+<h3 id="model注解">Model注解</h3>
+<p>对于Model的注解，Swagger提供了两个：@ApiModel及@ApiModelProperty，分别用以描述Model及Model内的属性。</p>
+<h4 id="1apimodel">1、@ApiModel</h4>
+<p>描述一个Model的信息（一般用在请求参数无法使用@ApiImplicitParam注解进行描述的时候）</p>
+<p>提供对Swagger model额外信息的描述。在标注@ApiOperation注解的操作内，所有的类将自动被内省（introspected），但利用这个注解可以做一些更加详细的model结构说明。主要属性有：</p>
+<ul>
+<li>value model的别名，默认为类名</li>
+<li>description model的详细描述</li>
+</ul>
+<h4 id="2apimodelproperty">2、@ApiModelProperty</h4>
+<p>描述一个model的属性</p>
+<p>对model属性的注解，主要的属性值有：</p>
+<ul>
+<li>value 属性简短描述</li>
+<li>example 属性的示例值</li>
+<li>required 是否为必须值</li>
+</ul>
+<h3 id="注解示例">注解示例</h3>
+<p>Api 示例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@AllArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/api/category&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Api</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/category&#34;</span><span style="color:#f92672">,</span> tags <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;组件分类&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BizCategoryController</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> IBizCategoryService bizCategoryService<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/list&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;列表&#34;</span><span style="color:#f92672">,</span> notes <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;分页列表&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> R<span style="color:#f92672">&lt;</span>PageModel<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>PageQuery pageQuery<span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                                          <span style="color:#a6e22e">@RequestParam</span> <span style="color:#a6e22e">@ApiParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;组件分类名称&#34;</span><span style="color:#f92672">)</span> String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        IPage<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;</span> page <span style="color:#f92672">=</span> bizCategoryService<span style="color:#f92672">.</span><span style="color:#a6e22e">page</span><span style="color:#f92672">(</span>pageQuery<span style="color:#f92672">.</span><span style="color:#a6e22e">loadPage</span><span style="color:#f92672">(),</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> LambdaQueryWrapper<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;().</span><span style="color:#a6e22e">like</span><span style="color:#f92672">(</span>BizCategory<span style="color:#f92672">::</span>getName<span style="color:#f92672">,</span> name<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">(</span>page<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/list/all&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;查询所有&#34;</span><span style="color:#f92672">,</span> notes <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;分页列表&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> R<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">listAll</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;</span> categories <span style="color:#f92672">=</span> bizCategoryService<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">(</span>categories<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/{categoryId}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;详情&#34;</span><span style="color:#f92672">,</span> notes <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;组件分类详情&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> R<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">detail</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@PathVariable</span> <span style="color:#a6e22e">@ApiParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分类Id&#34;</span><span style="color:#f92672">)</span> Long categoryId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        BizCategory category <span style="color:#f92672">=</span> bizCategoryService<span style="color:#f92672">.</span><span style="color:#a6e22e">getById</span><span style="color:#f92672">(</span>categoryId<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">(</span>category<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/save&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;保存&#34;</span><span style="color:#f92672">,</span> notes <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;新增或修改&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiImplicitParams</span><span style="color:#f92672">({</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">@ApiImplicitParam</span><span style="color:#f92672">(</span>paramType <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;form&#34;</span><span style="color:#f92672">,</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;categoryId&#34;</span><span style="color:#f92672">,</span> value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;组件id（修改时为必填）&#34;</span><span style="color:#f92672">),</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">@ApiImplicitParam</span><span style="color:#f92672">(</span>paramType <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;form&#34;</span><span style="color:#f92672">,</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">,</span> value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;组件分类名称&#34;</span><span style="color:#f92672">,</span> required <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">})</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> R<span style="color:#f92672">&lt;</span>BizCategory<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>Long categoryId<span style="color:#f92672">,</span> String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        BizCategory category <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BizCategory<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        category<span style="color:#f92672">.</span><span style="color:#a6e22e">setId</span><span style="color:#f92672">(</span>categoryId<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        category<span style="color:#f92672">.</span><span style="color:#a6e22e">setName</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        bizCategoryService<span style="color:#f92672">.</span><span style="color:#a6e22e">saveOrUpdate</span><span style="color:#f92672">(</span>category<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">(</span>category<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@DeleteMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/{categoryId}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiOperation</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;删除&#34;</span><span style="color:#f92672">,</span> notes <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;删除&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> R <span style="color:#a6e22e">delete</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@PathVariable</span> <span style="color:#a6e22e">@ApiParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分类Id&#34;</span><span style="color:#f92672">)</span> Long categoryId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        bizCategoryService<span style="color:#f92672">.</span><span style="color:#a6e22e">delete</span><span style="color:#f92672">(</span>categoryId<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>ApiModel 示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EqualsAndHashCode</span><span style="color:#f92672">(</span>callSuper <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Accessors</span><span style="color:#f92672">(</span>chain <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@ApiModel</span><span style="color:#f92672">(</span>value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;BizComponent对象&#34;</span><span style="color:#f92672">,</span> description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;组件&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BizComponent</span> <span style="color:#66d9ef">implements</span> Serializable <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@TableId</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">,</span> type <span style="color:#f92672">=</span> IdType<span style="color:#f92672">.</span><span style="color:#a6e22e">AUTO</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Long id<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiModelProperty</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;分类&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Long categoryId<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiModelProperty</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;组件名称&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiModelProperty</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;组件描述&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String description<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiModelProperty</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;日期字段&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> LocalDateTime componentTime<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiModelProperty</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;创建时间&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@TableField</span><span style="color:#f92672">(</span>fill <span style="color:#f92672">=</span> FieldFill<span style="color:#f92672">.</span><span style="color:#a6e22e">INSERT</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> LocalDateTime createTime<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ApiModelProperty</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;修改时间&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@TableField</span><span style="color:#f92672">(</span>fill <span style="color:#f92672">=</span> FieldFill<span style="color:#f92672">.</span><span style="color:#a6e22e">INSERT_UPDATE</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> LocalDateTime modifiedTime<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="三swagger-ui界面">三、swagger-ui界面</h2>
+<p>swagger生成的api文档信息接口为<code>/v2/api-docs</code>，不过我们可以使用ui界面更加清晰的查看<strong>文档说明</strong>，并且还能够<strong>在线调试</strong>。</p>
+<h4 id="springfox-swagger-ui">springfox-swagger-ui</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>io.springfox<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>springfox-swagger-ui<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>${springfox.swagger.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>如果是使用<code>springfox-swagger-ui</code>，启动项目后的api文档访问路径是 /swagger-ui.html。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/7/29/16c3b9f055e7fa5e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<h4 id="swagger-bootstrap-ui">swagger-bootstrap-ui</h4>
+<p><a href="https://gitee.com/xiaoym/swagger-bootstrap-ui">swagger-bootstrap-ui</a>是springfox-swagger的增强UI实现，api文档结构更加清晰，在线调试也很方便</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>com.github.xiaoymin<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>swagger-bootstrap-ui<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>${swagger.bootstrap.ui.version}<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>访问的url为 <code>/doc.html</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/7/29/16c3b9f061f3755e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<h2 id="四swagger分组">四、Swagger分组</h2>
+<p>Swagger的分组接口是通过后端配置不同的扫描包，将后端的接口，按配置的扫描包基础属性响应给前端。</p>
+<p>后端java的配置如下，指定分组名和各自要扫描的包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;defaultApi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> Docket <span style="color:#a6e22e">defaultApi</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Docket<span style="color:#f92672">(</span>DocumentationType<span style="color:#f92672">.</span><span style="color:#a6e22e">SWAGGER_2</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">apiInfo</span><span style="color:#f92672">(</span>apiInfo<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">groupName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;默认接口&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">select</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">apis</span><span style="color:#f92672">(</span>RequestHandlerSelectors<span style="color:#f92672">.</span><span style="color:#a6e22e">basePackage</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.example.demo.controller&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">paths</span><span style="color:#f92672">(</span>PathSelectors<span style="color:#f92672">.</span><span style="color:#a6e22e">any</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;groupApi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> Docket <span style="color:#a6e22e">groupRestApi</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Docket<span style="color:#f92672">(</span>DocumentationType<span style="color:#f92672">.</span><span style="color:#a6e22e">SWAGGER_2</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">apiInfo</span><span style="color:#f92672">(</span>groupApiInfo<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">groupName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分组接口&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">select</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">apis</span><span style="color:#f92672">(</span>RequestHandlerSelectors<span style="color:#f92672">.</span><span style="color:#a6e22e">basePackage</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.example.demo.group&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">paths</span><span style="color:#f92672">(</span>PathSelectors<span style="color:#f92672">.</span><span style="color:#a6e22e">any</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>分组信息的接口为 <code>/swagger-resources</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;分组接口&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/v2/api-docs?group=分组接口&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;swaggerVersion&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;2.0&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;location&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/v2/api-docs?group=分组接口&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">},{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;默认接口&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/v2/api-docs?group=默认接口&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;swaggerVersion&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;2.0&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;location&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/v2/api-docs?group=默认接口&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>在swagger-ui中也可以通过分组来查看api文档</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/7/29/16c3b9f053420aa5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center p-6 pr-3 no-underline"
+      href="http://localhost/posts/redis-%E7%AC%94%E8%AE%B0/"
+      ><span class="mr-1.5">←</span><span>Redis 笔记</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end p-6 pl-3 no-underline"
+      href="http://localhost/posts/velocity/"
+      ><span>Velocity 笔记</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2022
+    <a class="link" href="http://localhost/">My Docs</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >▷ Paper 6</a
+  >
+</footer>
+
+  </body>
+</html>

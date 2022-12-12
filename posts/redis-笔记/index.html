@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready text-sm lg:text-base"
+  style="--bg: #faf6f1"
+  lang="zh-cn"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Redis 笔记 - My Docs</title>
+
+  
+  <meta name="theme-color" />
+  
+  <meta name="description" content="REDIS NOTE 安装 启动 关闭 安装, 下载源码, 解压, 进入解压后的目录, 编译源码(需要gcc)
+$ tar zxvf redis-2.8.3.tar.gz
+$ cd redis-2.8.3
+$ make
+$ make PREFIX=/usr/local/redis install
+把源码包解压后目录中的 redis.conf, 复制到redis/bin/ 下
+启动
+方式一: 前端模式
+$ /usr/local/redis/bin/redis-server
+启动成功, 另开一窗口, 连接之, $ /usr/local/redis/bin/redis-cli (简化后的连接方式, 完整命令应是: ./redis-cli -h ip -p port) 方式二: 后端模式
+修改redis.conf, daemonize no 改为 daemonize yes
+$ /usr/local/redis/bin/redis-server ./redis.conf
+$ /usr/local/redis/bin/redis-cli 关闭(关闭redis 是在客户端完成的)
+$ ./bin/redis-cli shutdown
+redis 数据类型 ---------------------------------------------------------------------------------| key(都是字符串) |	value	| 类型 ||--------------------------------------------------------------------------------|	k1	|	&quot;小明&quot;	| String(字符串)	||--------------------------------------------------------------------------------| k2	|	{username:&quot;张三&quot;, age:&quot;18&quot;} | Hash, 即map ||--------------------------------------------------------------------------------|	k3	| [1, 2, 3, 4]	| List(双向链表)	||--------------------------------------------------------------------------------|	k4	| [&#39;a&#39;, &#39;b&#39;]	| Set(集合) ||--------------------------------------------------------------------------------|	k5	| [5000,&#39;a&#39;, 1000,&#39;b&#39;, 10,&#39;c&#39;]	| Zset(有序集合)	||--------------------------------------------------------------------------------String 类型 1." />
+  <meta
+    name="author"
+    content=""
+  />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost/main.min.css" />
+
+  
+  <script
+    defer
+    src="http://localhost/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+     
+  <link rel="preload" as="image" href="http://localhost/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://deno.land/logo.svg" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="http://localhost/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost/github.svg" />
+  
+
+  
+  <link rel="icon" href="http://localhost/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.108.0">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Redis 笔记" />
+<meta property="og:description" content="REDIS NOTE 安装 启动 关闭 安装, 下载源码, 解压, 进入解压后的目录, 编译源码(需要gcc)
+$ tar zxvf redis-2.8.3.tar.gz
+$ cd redis-2.8.3
+$ make
+$ make PREFIX=/usr/local/redis install
+把源码包解压后目录中的 redis.conf, 复制到redis/bin/ 下
+启动
+方式一: 前端模式
+$ /usr/local/redis/bin/redis-server
+启动成功, 另开一窗口, 连接之, $ /usr/local/redis/bin/redis-cli (简化后的连接方式, 完整命令应是: ./redis-cli -h ip -p port) 方式二: 后端模式
+修改redis.conf, daemonize no 改为 daemonize yes
+$ /usr/local/redis/bin/redis-server ./redis.conf
+$ /usr/local/redis/bin/redis-cli 关闭(关闭redis 是在客户端完成的)
+$ ./bin/redis-cli shutdown
+redis 数据类型 ---------------------------------------------------------------------------------| key(都是字符串) |	value	| 类型 ||--------------------------------------------------------------------------------|	k1	|	&quot;小明&quot;	| String(字符串)	||--------------------------------------------------------------------------------| k2	|	{username:&quot;张三&quot;, age:&quot;18&quot;} | Hash, 即map ||--------------------------------------------------------------------------------|	k3	| [1, 2, 3, 4]	| List(双向链表)	||--------------------------------------------------------------------------------|	k4	| [&#39;a&#39;, &#39;b&#39;]	| Set(集合) ||--------------------------------------------------------------------------------|	k5	| [5000,&#39;a&#39;, 1000,&#39;b&#39;, 10,&#39;c&#39;]	| Zset(有序集合)	||--------------------------------------------------------------------------------String 类型 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost/posts/redis-%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-08T14:16:10+08:00" />
+<meta property="article:modified_time" content="2022-12-08T14:16:10+08:00" />
+
+  
+  <meta itemprop="name" content="Redis 笔记">
+<meta itemprop="description" content="REDIS NOTE 安装 启动 关闭 安装, 下载源码, 解压, 进入解压后的目录, 编译源码(需要gcc)
+$ tar zxvf redis-2.8.3.tar.gz
+$ cd redis-2.8.3
+$ make
+$ make PREFIX=/usr/local/redis install
+把源码包解压后目录中的 redis.conf, 复制到redis/bin/ 下
+启动
+方式一: 前端模式
+$ /usr/local/redis/bin/redis-server
+启动成功, 另开一窗口, 连接之, $ /usr/local/redis/bin/redis-cli (简化后的连接方式, 完整命令应是: ./redis-cli -h ip -p port) 方式二: 后端模式
+修改redis.conf, daemonize no 改为 daemonize yes
+$ /usr/local/redis/bin/redis-server ./redis.conf
+$ /usr/local/redis/bin/redis-cli 关闭(关闭redis 是在客户端完成的)
+$ ./bin/redis-cli shutdown
+redis 数据类型 ---------------------------------------------------------------------------------| key(都是字符串) |	value	| 类型 ||--------------------------------------------------------------------------------|	k1	|	&quot;小明&quot;	| String(字符串)	||--------------------------------------------------------------------------------| k2	|	{username:&quot;张三&quot;, age:&quot;18&quot;} | Hash, 即map ||--------------------------------------------------------------------------------|	k3	| [1, 2, 3, 4]	| List(双向链表)	||--------------------------------------------------------------------------------|	k4	| [&#39;a&#39;, &#39;b&#39;]	| Set(集合) ||--------------------------------------------------------------------------------|	k5	| [5000,&#39;a&#39;, 1000,&#39;b&#39;, 10,&#39;c&#39;]	| Zset(有序集合)	||--------------------------------------------------------------------------------String 类型 1."><meta itemprop="datePublished" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="dateModified" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="wordCount" content="853">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis 笔记"/>
+<meta name="twitter:description" content="REDIS NOTE 安装 启动 关闭 安装, 下载源码, 解压, 进入解压后的目录, 编译源码(需要gcc)
+$ tar zxvf redis-2.8.3.tar.gz
+$ cd redis-2.8.3
+$ make
+$ make PREFIX=/usr/local/redis install
+把源码包解压后目录中的 redis.conf, 复制到redis/bin/ 下
+启动
+方式一: 前端模式
+$ /usr/local/redis/bin/redis-server
+启动成功, 另开一窗口, 连接之, $ /usr/local/redis/bin/redis-cli (简化后的连接方式, 完整命令应是: ./redis-cli -h ip -p port) 方式二: 后端模式
+修改redis.conf, daemonize no 改为 daemonize yes
+$ /usr/local/redis/bin/redis-server ./redis.conf
+$ /usr/local/redis/bin/redis-cli 关闭(关闭redis 是在客户端完成的)
+$ ./bin/redis-cli shutdown
+redis 数据类型 ---------------------------------------------------------------------------------| key(都是字符串) |	value	| 类型 ||--------------------------------------------------------------------------------|	k1	|	&quot;小明&quot;	| String(字符串)	||--------------------------------------------------------------------------------| k2	|	{username:&quot;张三&quot;, age:&quot;18&quot;} | Hash, 即map ||--------------------------------------------------------------------------------|	k3	| [1, 2, 3, 4]	| List(双向链表)	||--------------------------------------------------------------------------------|	k4	| [&#39;a&#39;, &#39;b&#39;]	| Set(集合) ||--------------------------------------------------------------------------------|	k5	| [5000,&#39;a&#39;, 1000,&#39;b&#39;, 10,&#39;c&#39;]	| Zset(有序集合)	||--------------------------------------------------------------------------------String 类型 1."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
+      href="http://localhost/"
+      >My Docs</a
+    >
+    <a
+      class="btn-dark ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+    ></a>
+  </div>
+
+  <a
+    class="btn-menu relative z-50 -mr-8 flex h-[5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+  ></a>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = `"#faf6f1"`.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:mt-0 lg:ml-12 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href=" https://twitter.com/dsumuzhe "
+        target="_blank"
+      ></a>
+      
+      <a
+        class="h-8 w-8 [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href=" https://github.com/renchangjiu "
+        target="_blank"
+      ></a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-10rem)] max-w-3xl px-8 pt-20 pb-32 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-20">
+    <h1 class="!my-0 pb-2.5">Redis 笔记</h1>
+
+    
+    <div class="text-sm opacity-60">
+      
+      <time>Dec 8, 2022</time>
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="redis-note">REDIS NOTE</h1>
+<h2 id="安装-启动-关闭">安装 启动 关闭</h2>
+<ol>
+<li>
+<p>安装, 下载源码, 解压, 进入解压后的目录, 编译源码(需要gcc)<br>
+<code>$ tar zxvf redis-2.8.3.tar.gz</code><br>
+<code>$ cd redis-2.8.3</code><br>
+<code>$ make</code><br>
+<code>$ make PREFIX=/usr/local/redis install</code><br>
+把源码包解压后目录中的 redis.conf, 复制到redis/bin/ 下</p>
+</li>
+<li>
+<p>启动</p>
+<ol>
+<li>方式一: 前端模式<br>
+<code>$ /usr/local/redis/bin/redis-server</code><br>
+启动成功, 另开一窗口, 连接之,
+<code>$ /usr/local/redis/bin/redis-cli</code> (简化后的连接方式, 完整命令应是: ./redis-cli -h ip -p port)</li>
+<li>方式二: 后端模式<br>
+修改redis.conf, daemonize no 改为 daemonize yes<br>
+<code>$ /usr/local/redis/bin/redis-server ./redis.conf</code><br>
+<code>$ /usr/local/redis/bin/redis-cli</code></li>
+</ol>
+</li>
+<li>
+<p>关闭(关闭redis 是在客户端完成的)<br>
+<code>$ ./bin/redis-cli shutdown</code></p>
+</li>
+</ol>
+<h2 id="redis-数据类型">redis 数据类型</h2>
+<pre><code>---------------------------------------------------------------------------------
+|  key(都是字符串)    |		         value				|     	 类型       	|
+|--------------------------------------------------------------------------------
+|		k1			  |	 &quot;小明&quot;	 						| String(字符串)		|
+|--------------------------------------------------------------------------------
+|       k2			  |	 {username:&quot;张三&quot;, age:&quot;18&quot;}    | Hash, 即map           |
+|--------------------------------------------------------------------------------
+|		k3			  |  [1, 2, 3, 4]					| List(双向链表)		|
+|--------------------------------------------------------------------------------
+|		k4			  |  ['a', 'b']						| Set(集合) 		    |
+|--------------------------------------------------------------------------------
+|		k5			  |  [5000,'a', 1000,'b', 10,'c']	| Zset(有序集合)	    |
+|--------------------------------------------------------------------------------
+</code></pre>
+<ol>
+<li>
+<p>String 类型
+1.1. 介绍: value 不仅可以是 String，也可以是数字, value &lt;= 512M
+1.2. 操作
+1. SET key value  : 赋值, 如果key 已经存在, 则覆盖
+2. GET key	      : 取值, 未取到则返回 nil
+3. 扩展命令:
+1. GETSET key : 先获取key 的值, 再赋值
+2. INCR key	  :将指定的key 的value 原子性的递增1, 如果该key 不存在, 则其初始值为0, 如果value 的值不能转成整型,
+则操作失败并返回相应的错误信息, 相当于 ++i
+3. DECR key   : 与INCR 相反
+4. APPEND key value : 字符串追加, 如果key 不存在, 则创建一个key/value</p>
+</li>
+<li>
+<p>Hash 类型</p>
+<ol>
+<li>
+<p>类似Java中的map, 适合存储对象的信息, 每一个hash可以存储4294967295个键值对</p>
+</li>
+<li>
+<p>操作
+赋值
+1. HSET key field value  : 为指定的key 设定键值对
+2. HMSET key fie value [field2 value2&hellip;]  : 设置key 中的多个field/value
+如 执行hmset hash2 username zhangsan age 18 sex man, 会得到 {username=zhangsan, age=18, sex=man}
+取值
+3. HGET key field  : 获取key中一个field 的value
+4. HMGET key field1 field2&hellip;  : 获取key 中的多个field的值
+5. HGETALL key  : 取得key中的所有与field/value
+删除
+6. HDEL key field [field&hellip;]  : 删除key中一个或多个字段, 返回被删除的字段的个数</p>
+<p>扩展
+7. HINCRBY key field increment  : 设置key 中field 的值增加increment
+8. HEXISTS key field            ：判断key中的filed是否存在
+9. HLEN key                     ：获取key所包含的field的数量
+10. HKEYS key                   : 获取key所有field
+11. HVALS key                   : 获得key所有value</p>
+</li>
+</ol>
+</li>
+<li>
+<p>List 类型</p>
+<ol>
+<li>介绍: 使用于大数据集合的增删, 任务队列等, 可包含的最大元素数量是	4294967295</li>
+<li>操作:
+赋值:
+1. LPUSH key value1 [v2 v3&hellip;]  ：在链表的头部插入values, 如果key不存在, 则创建一个新的空链表, 再向其插入values
+2. RPUSH key value1 [v2 v3&hellip;]  : 在链表的尾部添加values, 规则同上
+取值:
+3. LRANGE key start end : 获取链表中从start 到end 的元素的值, 从0 开始, 也可为负数,
+-1 表示链表尾部的元素, -2 表示倒数第二个, 以此类推
+删除:
+4. LPOP key  : 弹出并返回链表的头部元素
+5. RPOP key  : 弹出并返回链表的尾部元素
+扩展:
+6. LLEN key  : 返回链表中的元素数量
+7. LPUSHX key value：仅当参数中指定的key存在时（如果与key管理的list中没有值时，则该key是不存在的）在指定的key所关联的list的头部插入value
+8. RPUSHX key value：在该list的尾部添加元素, 规则同上
+9. LSET key index value：设置或替换链表中的index下标的元素值，0代表链表的头元素，-1代表链表的尾元素
+10. LINSERT key before|after pivot value：在pivot元素前或后插入value
+11. RPOPLPUSH source destination  : source, destination 是两个链表的key, 将source的尾部元素弹出并添加到destination的头部,
+若source 与destination 是相同的链表, 则实现自身的循环操作(队列)
+12. LREM key count value  ：删除count个值为value的元素，如果count大于0，从头向尾遍历并删除count个值为value的元素，
+如果count小于0，则从尾向头遍历并删除。如果count等于0，则删除链表中所有等于value的元素。</li>
+</ol>
+</li>
+<li>
+<p>set 类型</p>
+<ol>
+<li>介绍: 无序集合(元素不可重复), 适用于两个大数据集合的并集, 交集, 差集运算等</li>
+<li>操作:
+赋值:
+1. SADD key value1 [v2 v3&hellip;]  : 向set 中添加数据, 重复的值不会被添加
+取值:
+2. SMEMBERS key          : 返回set中所有元素
+3. SISMEMBER key member  : 判断set中是否存在指定member , 返回1(存在) 或0(不存在)
+删除:
+4. SREM key member1 [mr2 m3&hellip;]  : 删除set 中指定的成员
+集合运算:
+5. 差集:
+1. SDIFF key1 key2  : 返回属于key1 但不属于key2 的成员, 即差集
+2. SDIFFSTORE destination key1 key2  : 将key1, key2 的差集保存到destination 集合中
+6. 交集:
+1. SINTER key1 key2 key3&hellip;  : 返回交集
+2. SINTERSTORE destination key1 key2 key3&hellip;  : 将返回的交集保存到destination 集合中
+7. 并集:
+1. SUNION key1 key2 key3&hellip;  : 返回并集
+2. SUNIONSTORE key1 key2 key3&hellip;  : 将返回的并集保存到destination 集合中
+扩展:
+8. SCARD key       : 返回集合中的成员数量
+9. SRANDMEMBER key : 随机返回集合中的一个成员</li>
+</ol>
+</li>
+<li>
+<p>Zset 类型</p>
+<ol>
+<li>介绍: 有序集合, 适合用来做排行榜(默认从小到大排序, 排名从0 开始)等</li>
+<li>操作:
+赋值:
+1.1. ZADD key score1 member1 [s2 m2 s3 m3&hellip;]  : 将所有成员及其分数存放到sorted-set 中, 如果该元素已经存在则
+用新的分数替换原有的分数, 返回新加入到集合中的元素个数
+1.2. ZINCRBY key increment member  : 给指定成员的分数加上increment, 返回更改后的分数
+取值:
+2. ZSCORE key member  : 返回指定成员的分数
+3. ZCARD key          : 返回集合中的成员数量
+4. ZRANGE key start end [WITHSCORES]  : 返回集合中从start 到end 的成员, [WITHSCORES]参数是该命令同时返回成员
+所对应的分数(从小到大排序)
+5. ZREVRANGE key start end [WITHSCORES]  : 效果同上, 不过是从大到小排序
+删除:
+6. ZREM key member1 [m2 m3&hellip;]  : 删除集合中的指定成员, 可以指定多个成员
+7. ZREMRANGEBYRANK key start stop  : 按照排名范围删除成员(0 开始)
+8. ZREMRANGEBYSCORE key min max  : 按照分数范围删除成员
+扩展:
+9. ZCOUNT key min max  : 获取分数在[min, max] 之间的成员
+10. ZRANK key member  : 返回成员在集合中的排名, 索引(从小到大)
+11. ZREVRANK key member : 返回成员在集合中的排名, 索引(从大到小)</li>
+</ol>
+</li>
+<li>
+<p>redis 通用命令</p>
+<ol>
+<li>KEYS pattern             : 获取所有与pattern 匹配的key, *表示任意个任意字符, ?表示任意一个字符</li>
+<li>DEL key1 [key2 key3&hellip;]  : 删除指定的key, 可以同时删除多个key, 返回被删除的个数</li>
+<li>EXISTS key               : 判断该key是否存在, 返回1(存在), 或返回0(不存在)</li>
+<li>RENAME key newkey        : 重命名key</li>
+<li>TYPE key                 : 获取key 的类型, 返回字符串, 值为(string, hash, list, set, zset) 中之一,
+若key 不存在, 则返回none</li>
+<li>设置key 的生存时间:
+<ol>
+<li>EXPIRE key time     : 设置key 的过期时间(默认永久生存), 单位 秒</li>
+<li>TTL key             : 获取key 所剩的超时时间, 若未设置超时, 返回-1; 若返回-2, 表示key已经不存在</li>
+<li>PERSIST key         : 取消超时时间</li>
+</ol>
+</li>
+<li>flushdb                  : 清空当前数据库</li>
+<li>flushall                 : 清空所有数据库</li>
+<li>dbsize                   : 返回当前数据库中key 的数目</li>
+<li>info                    : 查看redis 的一些信息</li>
+<li>clear                   : 清屏</li>
+<li>exit                    : 退出连接</li>
+</ol>
+</li>
+<li>
+<p>多数据库
+一个redis实例最多可提供16个数据库, 从0到15，客户端默认连接第0号数据库</p>
+<ol>
+<li>select index      : 指定连接哪个库, index ∈ [0, 15]</li>
+<li>move key index    : 将当前库的key移动到index库中</li>
+</ol>
+</li>
+<li>
+<p>主从复制
+性质:</p>
+<ol>
+<li>Master 可以拥有多个slave</li>
+<li>多个slave 可以连接同一个master, 也可以连接到其他的slave</li>
+<li>主从复制不会阻塞master, 在同步数据时, master可以继续处理client请求
+配置:
+修改从服务器的配置文件(没有密码可以省略第二步):
+第一步: slave &lt;master_ip&gt; &lt;master_post&gt;
+第二步: masterauth <!-- raw HTML omitted --></li>
+</ol>
+</li>
+<li>
+<p>事务
+介绍: redis 的事务仅是为了数据的批量化操作</p>
+<ol>
+<li>开启:  multi
+<blockquote>
+<p>开启事务用于标记事务的开始, 其后执行的命令都将被存入命令队列, 直到执行EXEC 时, 这些命令才会被原子性的执行</p>
+</blockquote>
+</li>
+<li>提交: exec</li>
+<li>回滚: discard</li>
+</ol>
+</li>
+<li>
+<p>Java 连接redis</p>
+<ul>
+<li>服务器必需先开启端口(默认6379)</li>
+<li>修改redis.conf, 把 bind 127.0.0.1 改成 bind 0.0.0.0。</li>
+</ul>
+</li>
+<li>
+<p>消息订阅与发布</p>
+</li>
+<li>
+<p>redis 持久化
+6.1. 前言:
+由于Redis的数据都存放在内存中，如果没有配置持久化，redis重启后数据就全丢失了，于是需要开启redis的持久化功能，将数据保存到磁盘上，当redis重启后，可以从磁盘中恢复数据
+redis提供两种方式进行持久化:
+RDB持久化(redis默认使用)
+AOF持久化</p>
+<p>6.2. 二者的区别:
+1. RDB持久化是指在指定的时间间隔内将内存中的数据集快照写入磁盘
+2. AOF持久化以日志的形式记录服务器所处理的每一个写、删除操作，查询操作不会记录，以文本的方式记录，
+可以打开文件看到详细的操作记录。</p>
+<p>6.3. 二者优缺点
+1. RDB优势:
+1). 一旦采用该方式，那么你的整个Redis数据库将只包含一个文件，这对于文件备份而言是非常完美的。
+比如，你可能打算每个小时归档一次最近24小时的数据，同时还要每天归档一次最近30天的数据。
+通过这样的备份策略，一旦系统出现灾难性故障，我们可以非常容易的进行恢复。
+2). 对于灾难恢复而言，RDB是非常不错的选择。因为我们可以非常轻松的将一个单独的文件压缩后再转移到其它存储介质上。
+3). 性能最大化。对于Redis的服务进程而言，在开始持久化时，它唯一需要做的只是fork出子进程，之后再由子进程完成这些持久化的工作，这样就可以极大的避免服务进程执行IO操作了。
+4). 相比于AOF机制，如果数据集很大，RDB的启动效率会更高。</p>
+<pre><code> 2. RDB劣势:
+ 	1). 如果你想保证数据的高可用性，即最大限度的避免数据丢失，那么RDB将不是一个很好的选择。因为系统一旦在定时持久化之前出现宕机现象，此前没有来得及写入磁盘的数据都将丢失。
+ 	2). 由于RDB是通过fork子进程来协助完成数据持久化工作的，因此，如果当数据集较大时，可能会导致整个服务器停止服务几百毫秒，甚至是1秒钟。
+
+ 3. AOF优势:
+ 	1). 该机制可以带来更高的数据安全性，即数据持久性。Redis中提供了3中同步策略，即每秒同步、每修改同步和不同步。事实上，每秒同步也是异步完成的，其效率也是非常高的，
+ 		所差的是一旦系统出现宕机现象，那么这一秒钟之内修改的数据将会丢失。而每修改同步，我们可以将其视为同步持久化，即每次发生的数据变化都会被立即记录到磁盘中。
+ 		可以预见，这种方式在效率上是最低的。至于无同步，无需多言，我想大家都能正确的理解它。
+ 	2). 由于该机制对日志文件的写入操作采用的是append模式，因此在写入过程中即使出现宕机现象，也不会破坏日志文件中已经存在的内容。然而如果我们本次操作只是写入了一半数
+ 		据就出现了系统崩溃问题，不用担心，在Redis下一次启动之前，我们可以通过redis-check-aof工具来帮助我们解决数据一致性的问题。
+ 	3). 如果日志过大，Redis可以自动启用rewrite机制。即Redis以append模式不断的将修改数据写入到老的磁盘文件中，
+ 		同时Redis还会创建一个新的文件用于记录此期间有哪些修改命令被执行。因此在进行rewrite切换时可以更好的保证数据安全性。
+ 	4). AOF包含一个格式清晰、易于理解的日志文件用于记录所有的修改操作。事实上，我们也可以通过该文件完成数据的重建。
+
+ 4. AOF劣势:
+ 	1). 对于相同数量的数据集而言，AOF文件通常要大于RDB文件。RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。
+ 	2). 根据同步策略的不同，AOF在运行效率上往往会慢于RDB。总之，每秒同步策略的效率是比较高的，同步禁用策略的效率和RDB一样高效。
+ 5. 选择:
+ 	二者选择的标准，就是看系统是愿意牺牲一些性能，换取更高的缓存一致性（aof），还是愿意写操作频繁的时候，不启用备份来换取更高的性能，待手动运行save的时候，
+ 	再做备份（rdb）。rdb这个就更有些 eventually consistent的意思了。
+</code></pre>
+<p>6.4. 配置
+1. RDB持久化配置:
+Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
+<pre><code> 	save 900 1         #在900秒后，如果至少有1个key发生变化，则dump内存快照。
+ 	save 300 10        #在300秒后，如果至少有10个key发生变化，则dump内存快照。
+ 	save 60 10000      #在60秒后，如果至少有10000个key发生变化，则dump内存快照。
+
+ 2. AOF持久化配置:
+ 	在Redis的配置文件中存在三种同步方式，它们分别是：
+
+ 	appendfsync always      #每次有数据修改发生时都会写入AOF文件。
+ 	appendfsync everysec    #每秒钟同步一次，该策略为AOF的缺省策略。
+ 	appendfsync no          #从不同步, 高效但是数据不会被持久化。
+</code></pre>
+</li>
+</ol>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center p-6 pr-3 no-underline"
+      href="http://localhost/posts/git-commands/"
+      ><span class="mr-1.5">←</span><span>Git命令大全</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end p-6 pl-3 no-underline"
+      href="http://localhost/posts/swagger/"
+      ><span>Swagger教程</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2022
+    <a class="link" href="http://localhost/">My Docs</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >▷ Paper 6</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My Docs</title>
+    <link>http://localhost/posts/</link>
+    <description>Recent content in Posts on My Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 08 Dec 2022 14:16:10 +0800</lastBuildDate><atom:link href="http://localhost/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ADB命令大全</title>
+      <link>http://localhost/posts/adb%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/adb%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</guid>
+      <description>ADB命令大全 Adb的全称为Android Debug Bridge：android调试桥梁，下图为Android官方对adb的介绍： 可以看出，Android的初衷是用adb这样的一个工具来协助开发人员在开发android应用的过程中更快更好的调试apk，因此adb具有安装卸载apk、拷贝推送文件、查看设备硬件信息、查看应用程序占用资源、在设备执行shell命令等功能；
+我们可以在android sdk安装目录的platform-tools目录下找到adb工具；
+现有安卓系统的权限机制越来越完善，很多希望能够绕开权限管理机制进行的一些操作都已经无法使用，但是Adb却可以实现。实际上Adb在某种程度上有很大权限的，即使是在最新版本的Android系统上。因为Adb的设计初衷是为了方便开发人员调试，因此必然需要暴露一些权限以外的接口。于是很多公司利用这个特性可以绕开权限机制在非Root非定制机上做一些操作（具体用法就是下面说的这些），当然方式也是五花八门，比如通过手机OTG连接，这里不再赘述。
+ADB架构 为了方便理解，我们从三个指令入手，我们经常会用到adb start-server，adb devices,adb kill-server。 然后我们经常会看到这样的输出界面：
+C:\Users\dell&amp;gt;adb devicesList of devices attached* daemon not running. starting it now at tcp:5037 ** daemon started successfully * 于是这里有三点疑问，为什么是server，server对应的是服务器或者服务端吧？如果手机是客户端，服务端是不是指电脑上开启的服务。还有这个呆萌（daemon ）又是啥？
+ADB是一个C/S架构的应用程序，由三部分组成：
+运行在pc端的adb client： 命令行程序”adb”用于从shell或脚本中运行adb命令。首先，“adb”程序尝试定位主机上的ADB服务器，如果找不到ADB服务器，“adb”程序自动启动一个ADB服务器。接下来，当设备的adbd和pc端的adb server建立连接后，adb client就可以向ADB servcer发送服务请求； 运行在pc端的adb server： ADB Server是运行在主机上的一个后台进程。它的作用在于检测USB端口感知设备的连接和拔除，以及模拟器实例的启动或停止，ADB Server还需要将adb client的请求通过usb或者tcp的方式发送到对应的adbd上； 运行在设备端的常驻进程adb demon (adbd)： 程序“adbd”作为一个后台进程在Android设备或模拟器系统中运行。它的作用是连接ADB服务器，并且为运行在主机上的客户端提供一些服务； ADB端口被占用 有小伙伴说希望我把Adb启动问题放在最前面，因为他经常遇到adb找不到设备的问题，那我就放到前面吧，我想肯定不止是她一个人会遇到这种情况。
+5037为adb默认端口，若5037端口被占用，则我们在使用Adb命令的时候会因为找不到设备而困扰，这个问题对于Adb不是很熟悉的小伙伴来说会经常遇到，因此我就把这个用法放在文章开头了，以便于小伙伴能方便找到； 解决这种端口占用的问题思路都是一样的，三步走：
+找到使用该端口的进程Pid； C:\Windows\system32&amp;gt;netstat -aon|findstr 5037 TCP 127.0.0.1:5037 0.0.0.0:0 LISTENING 3172 12 通过PID找到对应的进程名（便于定位，可以跳过）； C:\Windows\system32&amp;gt;tasklist /fi &amp;#34;PID eq 3172&amp;#34; 映像名称 PID 会话名 会话# 内存使用 ========================= ======== ================ =========== ============ 360MobileLink.</description>
+    </item>
+    
+    <item>
+      <title>Docker 命令大全</title>
+      <link>http://localhost/posts/docker-commands/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/docker-commands/</guid>
+      <description>Docker 命令大全 一、容器生命周期管理 1、run **docker run ：**创建一个新的容器并运行一个命令
+语法 docker run [OPTIONS] IMAGE [COMMAND] [ARG...] OPTIONS说明：
+-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项； -d: 后台运行容器，并返回容器ID； -i: 以交互模式运行容器，通常与 -t 同时使用； -P: 随机端口映射，容器内部端口随机映射到主机的端口 -p: 指定端口映射，格式为：主机(宿主)端口:容器端口 -t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用； &amp;ndash;name=&amp;ldquo;nginx-lb&amp;rdquo;: 为容器指定一个名称； &amp;ndash;dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致； &amp;ndash;dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致； -h &amp;ldquo;mars&amp;rdquo;: 指定容器的hostname； -e username=&amp;ldquo;ritchie&amp;rdquo;: 设置环境变量； &amp;ndash;env-file=[]: 从指定文件读入环境变量； &amp;ndash;cpuset=&amp;ldquo;0-2&amp;rdquo; or &amp;ndash;cpuset=&amp;ldquo;0,1,2&amp;rdquo;: 绑定容器到指定CPU运行； **-m :**设置容器使用内存最大值； &amp;ndash;net=&amp;ldquo;bridge&amp;rdquo;: 指定容器的网络连接类型，支持 bridge/host/none/container 四种类型，默认bridge； &amp;ndash;link=[]: 添加链接到另一个容器； &amp;ndash;expose=[]: 开放一个端口或一组端口； &amp;ndash;volume , -v: 绑定一个卷 实例 使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。</description>
+    </item>
+    
+    <item>
+      <title>Git命令大全</title>
+      <link>http://localhost/posts/git-commands/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/git-commands/</guid>
+      <description>Git命令大全 git config 配置 Git 的相关参数。
+Git 一共有3个配置文件：
+仓库级的配置文件：在仓库的 .git/.gitconfig，该配置文件只对所在的仓库有效。 全局配置文件：Mac 系统在 ~/.gitconfig，Windows 系统在 C:\Users\&amp;lt;用户名&amp;gt;\.gitconfig。 系统级的配置文件：在 Git 的安装目录下（Mac 系统下安装目录在 /usr/local/git）的 etc 文件夹中的 gitconfig。 # 查看配置信息 # --local：仓库级，--global：全局级，--system：系统级 $ git config &amp;lt;--local | --global | --system&amp;gt; -l # 查看当前生效的配置信息 $ git config -l # 编辑配置文件 # --local：仓库级，--global：全局级，--system：系统级 $ git config &amp;lt;--local | --global | --system&amp;gt; -e # 添加配置项 # --local：仓库级，--global：全局级，--system：系统级 $ git config &amp;lt;--local | --global | --system&amp;gt; --add &amp;lt;name&amp;gt; &amp;lt;value&amp;gt; # 获取配置项 $ git config &amp;lt;--local | --global | --system&amp;gt; --get &amp;lt;name&amp;gt; # 删除配置项 $ git config &amp;lt;--local | --global | --system&amp;gt; --unset &amp;lt;name&amp;gt; # 配置提交记录中的用户信息 $ git config --global user.</description>
+    </item>
+    
+    <item>
+      <title>Redis 笔记</title>
+      <link>http://localhost/posts/redis-%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/redis-%E7%AC%94%E8%AE%B0/</guid>
+      <description>REDIS NOTE 安装 启动 关闭 安装, 下载源码, 解压, 进入解压后的目录, 编译源码(需要gcc)
+$ tar zxvf redis-2.8.3.tar.gz
+$ cd redis-2.8.3
+$ make
+$ make PREFIX=/usr/local/redis install
+把源码包解压后目录中的 redis.conf, 复制到redis/bin/ 下
+启动
+方式一: 前端模式
+$ /usr/local/redis/bin/redis-server
+启动成功, 另开一窗口, 连接之, $ /usr/local/redis/bin/redis-cli (简化后的连接方式, 完整命令应是: ./redis-cli -h ip -p port) 方式二: 后端模式
+修改redis.conf, daemonize no 改为 daemonize yes
+$ /usr/local/redis/bin/redis-server ./redis.conf
+$ /usr/local/redis/bin/redis-cli 关闭(关闭redis 是在客户端完成的)
+$ ./bin/redis-cli shutdown
+redis 数据类型 ---------------------------------------------------------------------------------| key(都是字符串) |	value	| 类型 ||--------------------------------------------------------------------------------|	k1	|	&amp;quot;小明&amp;quot;	| String(字符串)	||--------------------------------------------------------------------------------| k2	|	{username:&amp;quot;张三&amp;quot;, age:&amp;quot;18&amp;quot;} | Hash, 即map ||--------------------------------------------------------------------------------|	k3	| [1, 2, 3, 4]	| List(双向链表)	||--------------------------------------------------------------------------------|	k4	| [&#39;a&#39;, &#39;b&#39;]	| Set(集合) ||--------------------------------------------------------------------------------|	k5	| [5000,&#39;a&#39;, 1000,&#39;b&#39;, 10,&#39;c&#39;]	| Zset(有序集合)	||--------------------------------------------------------------------------------String 类型 1.</description>
+    </item>
+    
+    <item>
+      <title>Swagger教程</title>
+      <link>http://localhost/posts/swagger/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/swagger/</guid>
+      <description>Swagger使用和注释 一、介绍 Swagger是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。
+作用
+接口文档在线自动生成 功能测试 Swagger是一组开源项目，其中主要要项目如下：
+Swagger-tools:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。 Swagger-core: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF&amp;hellip;)、Servlets和Play框架进行集成。 Swagger-js: 用于JavaScript的Swagger实现。 Swagger-node-express: Swagger模块，用于node.js的Express web应用框架。 Swagger-ui：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。 Swagger-codegen：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。 二、使用 在Spring中集成Swagger会使用到springfox-swagger，它对Spring和Swagger的使用进行了整合。
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${springfox.swagger.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;springfox-swagger-ui&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${springfox.swagger.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; Spring中配置Swagger
+/** * Swagger2配置类 * 在与spring boot集成时，放在与Application.java同级的目录下。 * 或者通过 @Import 导入配置 */ @Configuration @EnableSwagger2 public class Swagger2 { /** * 创建API应用 * apiInfo() 增加API相关信息 * 通过select()函数返回一个ApiSelectorBuilder实例,用来控制哪些接口暴露给Swagger来展现， * 本例采用指定扫描的包路径来定义指定要建立API的目录。 * @return */ @Bean public Docket createRestApi() { return new Docket(DocumentationType.</description>
+    </item>
+    
+    <item>
+      <title>Velocity 笔记</title>
+      <link>http://localhost/posts/velocity/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/velocity/</guid>
+      <description>Velocity 笔记 一. velocity简介 1. velocity简介 Velocity 是一个基于 Java 的模板引擎，可以通过特定的语法获取在 Java 对象的数据 , 填充到模板中，从而实现界面和 Java 代码的分离 。
+2. 应用场景 Web 应用程序 : 作为为应用程序的视图, 展示数据。 源代码生成 : Velocity可用于基于模板生成Java源代码。 自动电子邮件 : 网站注册 , 认证等的电子邮件模板。 网页静态化 : 基于velocity模板 , 生成静态网页。 3. velocity 组成结构 Velocity主要分为 app、context、runtime 和一些辅助 util 几个部分。
+app模块 : 主要封装了一些接口 , 暴露给使用者使用。主要有两个类，分别是Velocity(单例)和VelocityEngine。
+Context模块 : 主要封装了模板渲染需要的变量
+Runtime模块 : 整个Velocity的核心模块，Runtime模块会将加载的模板解析成语法树，Velocity调用mergeTemplate方法时会渲染整棵树，并输出最终的渲染结果。
+RuntimeInstance类为整个Velocity渲染提供了一个单例模式，拿到了这个实例就可以完成渲染过程了。
+二. 快速入门 1. 需求分析 使用velocity定义html模板 , 将动态数据填充到模板中 , 形成一个完整的html页面
+2. 步骤分析 创建项目(maven) 引入依赖 定义模板 输出html 3.</description>
+    </item>
+    
+    <item>
+      <title>代码片段</title>
+      <link>http://localhost/posts/code-segment/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/code-segment/</guid>
+      <description>代码片段 1. maven install 跳过测试 mvn install -Dmaven.test.skip=true
+2. 命令行下指定编码方式连接MySQL mysql -uroot -proot --default-character-set=utf8
+3. 创建数据库并设置字符集 CREATE DATABASE oa DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+4. 安装jar包到本地maven仓库 mvn install:install-file -Dfile=aspose-words-21.11.0-jdk17.jar -DgroupId=com.aspose -DartifactId=aspose-words -Dversion=21.11.0 -Dpackaging=jar
+5. maven 指定Java版本(pom.xml) &amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt; &amp;lt;maven.compiler.target&amp;gt;1.8&amp;lt;/maven.compiler.target&amp;gt; &amp;lt;maven.compiler.source&amp;gt;1.8&amp;lt;/maven.compiler.source&amp;gt; &amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt; 6. 上传 jar 文件到 maven 中央仓库 mvn gpg:sign-and-deploy-file -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=D:/a/gmssl_provider-2022.pom -Dfile=D:/a/gmssl_provider-2022.jar -Djavadoc=D:/a/gmssl_provider-2022-javadoc.jar -Dsources=D:/a/gmssl_provider-2022-sources.jar</description>
+    </item>
+    
+    <item>
+      <title>发布 jar 包到 maven 中央仓库详细教程</title>
+      <link>http://localhost/posts/%E5%8F%91%E5%B8%83jar%E5%8C%85%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Thu, 08 Dec 2022 14:16:10 +0800</pubDate>
+      
+      <guid>http://localhost/posts/%E5%8F%91%E5%B8%83jar%E5%8C%85%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/</guid>
+      <description>如何发布 jar 包到 maven 中央仓库详细教程 java 开发中没少用各种 jar 包，特别是使用 maven，gradle 构建工具，方便有效。总是只取不予，也应该懂得奉献，当你写好了一个十分好用的 jar 包，想贡献出去给大家使用的时候，应该怎么做呢？当然是发布到 maven 的中央仓库了
+开始要注意这个几个 Maven 相关地址：
+工单管理：https://issues.sonatype.org 就是申请上传资格和 groupId 的地方,注册账号、创建和管理 issue，Jar 包的发布是以解决 issue 的方式起步的
+构件仓库 : https://oss.sonatype.org/#welcome 把 jar 包上传到这里，Release 之后就会同步到 maven 中央仓库。
+仓库镜像: http://search.maven.org/ 最终工件可以在这里搜索到。
+一. 注册 sonatype 帐号(register sonatype) 访问Sonatype，注册帐号
+二. 创建工单（nexus) 点击 header 头 “create”按钮创建一个工单，主要用途注册你上传 jar 包基本信息，主要 groupid，通过审核有两个目的：1.防止重复，约束 groupid 规范，定义 grupid 最好有所属的域名
+比如：你申请 com.hippo 那么你最有有 hippo.com 这个域名的所有权。如果你不符合还有一个解决办法，groupid 申请以：com.github.{账号名来定义}
+创建成功后，接下来等待后台管理员审核，一般一个工作日以内，当 Issue 的 Status 变为 RESOLVED 后，就可以进行下一步操作了，否则，就等待… 审批通过后，通常管理员会给你留言配置方法，大体文字如下：</description>
+    </item>
+    
+  </channel>
+</rss>
