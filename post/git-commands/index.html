@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git命令大全 - My Docs</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="yui" /><meta name="description" content="Git命令大全 git config 配置 Git 的相关参数。 Git 一共有3个配置文件： 仓库级的配置文件：在仓库的 .git/.gitconfig，该配置文件只对所在的仓库" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/git-commands/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git命令大全" />
+<meta property="og:description" content="Git命令大全 git config 配置 Git 的相关参数。 Git 一共有3个配置文件： 仓库级的配置文件：在仓库的 .git/.gitconfig，该配置文件只对所在的仓库" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/git-commands/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-08T14:16:10+08:00" />
+<meta property="article:modified_time" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="name" content="Git命令大全">
+<meta itemprop="description" content="Git命令大全 git config 配置 Git 的相关参数。 Git 一共有3个配置文件： 仓库级的配置文件：在仓库的 .git/.gitconfig，该配置文件只对所在的仓库"><meta itemprop="datePublished" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="dateModified" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="wordCount" content="4186">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git命令大全"/>
+<meta name="twitter:description" content="Git命令大全 git config 配置 Git 的相关参数。 Git 一共有3个配置文件： 仓库级的配置文件：在仓库的 .git/.gitconfig，该配置文件只对所在的仓库"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">My Docs</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">My Docs</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git命令大全</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-12-08 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#git命令大全">Git命令大全</a>
+      <ul>
+        <li><a href="#git-config">git config</a></li>
+        <li><a href="#git-clone">git clone</a></li>
+        <li><a href="#git-init">git init</a></li>
+        <li><a href="#git-status">git status</a></li>
+        <li><a href="#git-remote">git remote</a></li>
+        <li><a href="#git-branch">git branch</a></li>
+        <li><a href="#git-checkout">git checkout</a></li>
+        <li><a href="#git-cherry-pick">git cherry-pick</a></li>
+        <li><a href="#git-add">git add</a></li>
+        <li><a href="#git-commit">git commit</a></li>
+        <li><a href="#git-fetch">git fetch</a></li>
+        <li><a href="#git-merge">git merge</a></li>
+        <li><a href="#git-diff">git diff</a></li>
+        <li><a href="#git-pull">git pull</a></li>
+        <li><a href="#git-push">git push</a></li>
+        <li><a href="#git-log">git log</a></li>
+        <li><a href="#git-reset">git reset</a></li>
+        <li><a href="#git-revert">git revert</a></li>
+        <li><a href="#git-tag">git tag</a></li>
+        <li><a href="#git-mv">git mv</a></li>
+        <li><a href="#git-rm">git rm</a></li>
+        <li><a href="#git操作场景示例">Git操作场景示例</a>
+          <ul>
+            <li><a href="#1-删除掉本地不存在的远程分支">1. 删除掉本地不存在的远程分支</a></li>
+            <li><a href="#2-本地分支关联远程仓库">2. 本地分支关联远程仓库</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="git命令大全">Git命令大全</h1>
+<h2 id="git-config">git config</h2>
+<p>配置 Git 的相关参数。</p>
+<p>Git 一共有3个配置文件：</p>
+<ol>
+<li>仓库级的配置文件：在仓库的 <code>.git/.gitconfig</code>，该配置文件只对所在的仓库有效。</li>
+<li>全局配置文件：Mac 系统在 <code>~/.gitconfig</code>，Windows 系统在 <code>C:\Users\&lt;用户名&gt;\.gitconfig</code>。</li>
+<li>系统级的配置文件：在 Git 的安装目录下（Mac 系统下安装目录在 <code>/usr/local/git</code>）的 <code>etc</code> 文件夹中的 <code>gitconfig</code>。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 查看配置信息</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --local：仓库级，--global：全局级，--system：系统级</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">&lt;--</span><span class="n">local</span> <span class="o">|</span> <span class="o">--</span><span class="n">global</span> <span class="o">|</span> <span class="o">--</span><span class="nb">system</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">l</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看当前生效的配置信息</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">-</span><span class="n">l</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 编辑配置文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --local：仓库级，--global：全局级，--system：系统级</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">&lt;--</span><span class="n">local</span> <span class="o">|</span> <span class="o">--</span><span class="n">global</span> <span class="o">|</span> <span class="o">--</span><span class="nb">system</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">e</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加配置项</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --local：仓库级，--global：全局级，--system：系统级</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">&lt;--</span><span class="n">local</span> <span class="o">|</span> <span class="o">--</span><span class="n">global</span> <span class="o">|</span> <span class="o">--</span><span class="nb">system</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">add</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取配置项</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">&lt;--</span><span class="n">local</span> <span class="o">|</span> <span class="o">--</span><span class="n">global</span> <span class="o">|</span> <span class="o">--</span><span class="nb">system</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">get</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除配置项</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">&lt;--</span><span class="n">local</span> <span class="o">|</span> <span class="o">--</span><span class="n">global</span> <span class="o">|</span> <span class="o">--</span><span class="nb">system</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">unset</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置提交记录中的用户信息</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="o">&lt;</span><span class="err">用户名</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">&lt;</span><span class="err">邮箱地址</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 更改Git缓存区的大小</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果提交的内容较大，默认缓存较小，提交会失败</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 缓存大小单位：B，例如：524288000（500MB）</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">http</span><span class="o">.</span><span class="n">postBuffer</span> <span class="o">&lt;</span><span class="err">缓存大小</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 调用 git status/git diff 命令时以高亮或彩色方式显示改动状态</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">color</span><span class="o">.</span><span class="n">ui</span> <span class="kp">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置可以缓存密码，默认缓存时间15分钟</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">credential</span><span class="o">.</span><span class="n">helper</span> <span class="n">cache</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置密码的缓存时间</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 缓存时间单位：秒</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">credential</span><span class="o">.</span><span class="n">helper</span> <span class="s1">&#39;cache --timeout=&lt;缓存时间&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置长期存储密码</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">credential</span><span class="o">.</span><span class="n">helper</span> <span class="n">store</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-clone">git clone</h2>
+<p>从远程仓库克隆一个版本库到本地。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 默认在当前目录下创建和版本库名相同的文件夹并下载版本到该文件夹下</span>
+</span></span><span class="line"><span class="cl">$ git clone &lt;远程仓库的网址&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定本地仓库的目录</span>
+</span></span><span class="line"><span class="cl">$ git clone &lt;远程仓库的网址&gt; &lt;本地目录&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># -b 指定要克隆的分支，默认是master分支</span>
+</span></span><span class="line"><span class="cl">$ git clone &lt;远程仓库的网址&gt; -b &lt;分支名称&gt; &lt;本地目录&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-init">git init</h2>
+<p>初始化项目所在目录，初始化后会在当前目录下出现一个名为 .git 的目录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 初始化本地仓库，在当前目录下生成 .git 文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">init</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-status">git status</h2>
+<p>查看本地仓库的状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 查看本地仓库的状态</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">status</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 以简短模式查看本地仓库的状态</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 会显示两列，第一列是文件的状态，第二列是对应的文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 文件状态：A 新增，M 修改，D 删除，?? 未添加到Git中</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">status</span> <span class="o">-</span><span class="n">s</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-remote">git remote</h2>
+<p>操作远程库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 列出已经存在的远程仓库</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出远程仓库的详细信息，在别名后面列出URL地址</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="o">--</span><span class="n">verbose</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加远程仓库</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="o">&lt;</span><span class="err">远程仓库的别名</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">远程仓库的</span><span class="no">URL</span><span class="err">地址</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改远程仓库的别名</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="n">rename</span> <span class="o">&lt;</span><span class="err">原远程仓库的别名</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">新的别名</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除指定名称的远程仓库</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="n">remove</span> <span class="o">&lt;</span><span class="err">远程仓库的别名</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改远程仓库的 URL 地址</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="n">set</span><span class="o">-</span><span class="n">url</span> <span class="o">&lt;</span><span class="err">远程仓库的别名</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">新的远程仓库</span><span class="no">URL</span><span class="err">地址</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-branch">git branch</h2>
+<p>操作 Git 的分支命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 列出本地的所有分支，当前所在分支以 &#34;*&#34; 标出</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出本地的所有分支并显示最后一次提交，当前所在分支以 &#34;*&#34; 标出</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建新分支，新的分支基于上一次提交建立</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">&lt;</span><span class="err">分支名</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改分支名称</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果不指定原分支名称则为当前所在分支</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">m</span> <span class="o">[&lt;</span><span class="err">原分支名称</span><span class="o">&gt;]</span> <span class="o">&lt;</span><span class="err">新的分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 强制修改分支名称</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">M</span> <span class="o">[&lt;</span><span class="err">原分支名称</span><span class="o">&gt;]</span> <span class="o">&lt;</span><span class="err">新的分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除指定的本地分支</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 强制删除指定的本地分支</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">D</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-checkout">git checkout</h2>
+<p>检出命令，用于创建、切换分支等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 切换到已存在的指定分支</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建并切换到指定的分支，保留所有的提交记录</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 等同于 &#34;git branch&#34; 和 &#34;git checkout&#34; 两个命令合并</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建并切换到指定的分支，删除所有的提交记录</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="o">--</span><span class="n">orphan</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 替换掉本地的改动，新增的文件和已经添加到暂存区的内容不受影响</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="err">文件路径</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-cherry-pick">git cherry-pick</h2>
+<p>把已经提交的记录合并到当前分支。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 把已经提交的记录合并到当前分支</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">cherry</span><span class="o">-</span><span class="n">pick</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-add">git add</h2>
+<p>把要提交的文件的信息添加到暂存区中。当使用 git commit 时，将依据暂存区中的内容来进行文件的提交。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="err">#</span> <span class="err">把指定的文件添加到暂存区中</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">&lt;</span><span class="err">文件路径</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">添加所有修改、已删除的文件到暂存区中</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">-</span><span class="n">u</span> <span class="p">[&lt;</span><span class="err">文件路径</span><span class="p">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">--</span><span class="n">update</span> <span class="p">[&lt;</span><span class="err">文件路径</span><span class="p">&gt;]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">添加所有修改、已删除、新增的文件到暂存区中，省略</span> <span class="p">&lt;</span><span class="err">文件路径</span><span class="p">&gt;</span> <span class="err">即为当前目录</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">-</span><span class="n">A</span> <span class="p">[&lt;</span><span class="err">文件路径</span><span class="p">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">--</span><span class="n">all</span> <span class="p">[&lt;</span><span class="err">文件路径</span><span class="p">&gt;]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">查看所有修改、已删除但没有提交的文件，进入一个子命令系统</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">-</span><span class="n">i</span> <span class="p">[&lt;</span><span class="err">文件路径</span><span class="p">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="k">add</span> <span class="p">--</span><span class="n">interactive</span> <span class="p">[&lt;</span><span class="err">文件路径</span><span class="p">&gt;]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-commit">git commit</h2>
+<p>将暂存区中的文件提交到本地仓库中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 把暂存区中的文件提交到本地仓库，调用文本编辑器输入该次提交的描述信息</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">commit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 把暂存区中的文件提交到本地仓库中并添加描述信息</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&#34;&lt;提交的描述信息&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 把所有修改、已删除的文件提交到本地仓库中</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 不包括未被版本库跟踪的文件，等同于先调用了 &#34;git add -u&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&#34;&lt;提交的描述信息&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改上次提交的描述信息</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-fetch">git fetch</h2>
+<p>从远程仓库获取最新的版本到本地的 tmp 分支上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 将远程仓库所有分支的最新版本全部取回到本地</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">fetch</span> <span class="o">&lt;</span><span class="err">远程仓库的别名</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将远程仓库指定分支的最新版本取回到本地</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">fetch</span> <span class="o">&lt;</span><span class="err">远程主机名</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">分支名</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-merge">git merge</h2>
+<p>合并分支。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 把指定的分支合并到当前所在的分支下</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">merge</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-diff">git diff</h2>
+<p>比较版本之间的差异。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 比较当前文件和暂存区中文件的差异，显示没有暂存起来的更改</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 比较暂存区中的文件和上次提交时的差异</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="o">--</span><span class="n">cached</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="o">--</span><span class="n">staged</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 比较当前文件和上次提交时的差异</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="no">HEAD</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看从指定的版本之后改动的内容</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 比较两个分支之间的差异</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看两个分支分开后各自的改动内容</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">diff</span> <span class="o">&lt;</span><span class="err">分支名称</span><span class="o">&gt;...&lt;</span><span class="err">分支名称</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-pull">git pull</h2>
+<p>从远程仓库获取最新版本并合并到本地。
+首先会执行 <code>git fetch</code>，然后执行 <code>git merge</code>，把获取的分支的 HEAD 合并到当前分支。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 从远程仓库获取最新版本。</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">pull</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-push">git push</h2>
+<p>把本地仓库的提交推送到远程仓库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 把本地仓库的分支推送到远程仓库的指定分支</span>
+</span></span><span class="line"><span class="cl">$ git push &lt;远程仓库的别名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除指定的远程仓库的分支</span>
+</span></span><span class="line"><span class="cl">$ git push &lt;远程仓库的别名&gt; :&lt;远程分支名&gt;
+</span></span><span class="line"><span class="cl">$ git push &lt;远程仓库的别名&gt; --delete &lt;远程分支名&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-log">git log</h2>
+<p>显示提交的记录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 打印所有的提交记录</span>
+</span></span><span class="line"><span class="cl">$ git log
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印从第一次提交到指定的提交的记录</span>
+</span></span><span class="line"><span class="cl">$ git log &lt;commit ID&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印指定数量的最新提交的记录</span>
+</span></span><span class="line"><span class="cl">$ git log -&lt;指定的数量&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-reset">git reset</h2>
+<p>还原提交记录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 重置暂存区，但文件不受影响</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 相当于将用 &#34;git add&#34; 命令更新到暂存区的内容撤出暂存区，可以指定文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 没有指定 commit ID 则默认为当前 HEAD</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">[&lt;</span><span class="err">文件路径</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">mixed</span> <span class="o">[&lt;</span><span class="err">文件路径</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将 HEAD 的指向改变，撤销到指定的提交记录，文件未修改</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">mixed</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将 HEAD 的指向改变，撤销到指定的提交记录，文件未修改</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 相当于调用 &#34;git reset --mixed&#34; 命令后又做了一次 &#34;git add&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">soft</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将 HEAD 的指向改变，撤销到指定的提交记录，文件也修改了</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-revert">git revert</h2>
+<p>生成一个新的提交来撤销某次提交，此次提交之前的所有提交都会被保留。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 生成一个新的提交来撤销某次提交</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">revert</span> <span class="o">&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-tag">git tag</h2>
+<p>操作标签的命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 打印所有的标签</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">tag</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加轻量标签，指向提交对象的引用，可以指定之前的提交记录</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">tag</span> <span class="o">&lt;</span><span class="err">标签名称</span><span class="o">&gt;</span> <span class="o">[&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加带有描述信息的附注标签，可以指定之前的提交记录</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="o">&lt;</span><span class="err">标签名称</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="err">标签描述信息</span><span class="o">&gt;</span> <span class="o">[&lt;</span><span class="n">commit</span> <span class="no">ID</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 切换到指定的标签</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="err">标签名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看标签的信息</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">show</span> <span class="o">&lt;</span><span class="err">标签名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除指定的标签</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="err">标签名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将指定的标签提交到远程仓库</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">push</span> <span class="o">&lt;</span><span class="err">远程仓库的别名</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">标签名称</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将本地所有的标签全部提交到远程仓库</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">push</span> <span class="o">&lt;</span><span class="err">远程仓库的别名</span><span class="o">&gt;</span> <span class="err">–</span><span class="n">tags</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-mv">git mv</h2>
+<p>重命名文件或者文件夹。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 重命名指定的文件或者文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">mv</span> <span class="o">&lt;</span><span class="err">源文件</span><span class="o">/</span><span class="err">文件夹</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="err">目标文件</span><span class="o">/</span><span class="err">文件夹</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-rm">git rm</h2>
+<p>删除文件或者文件夹。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 移除跟踪指定的文件，并从本地仓库的文件夹中删除</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">rm</span> <span class="o">&lt;</span><span class="err">文件路径</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 移除跟踪指定的文件夹，并从本地仓库的文件夹中删除</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="err">文件夹路径</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 移除跟踪指定的文件，在本地仓库的文件夹中保留该文件</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">rm</span> <span class="o">--</span><span class="n">cached</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git操作场景示例">Git操作场景示例</h2>
+<h3 id="1-删除掉本地不存在的远程分支">1. 删除掉本地不存在的远程分支</h3>
+<p>多人合作开发时，如果远程的分支被其他开发删除掉，在本地执行 <code>git branch --all</code> 依然会显示该远程分支，可使用下列的命令进行删除：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># 使用 pull 命令，添加 -p 参数</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">pull</span> <span class="o">-</span><span class="nb">p</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 等同于下面的命令</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">fetch</span> <span class="o">-</span><span class="nb">p</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">fetch</span> <span class="o">--</span><span class="n">prune</span> <span class="n">origin</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-本地分支关联远程仓库">2. 本地分支关联远程仓库</h3>
+<h4 id="远程仓库中分支存在">远程仓库中分支存在</h4>
+<p>方法一：(已经创建了本地分支)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch --set-upstream-to<span class="o">=</span>origin/remote_branch  your_branch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//等同于
+</span></span><span class="line"><span class="cl">git branch -u origin/remote_branch your_branch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法二：（本地分支不存在，本地名称与远程名称不同）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git branch new_branch origin/remote_branch
+</span></span><span class="line"><span class="cl">// 或者
+</span></span><span class="line"><span class="cl">git fetch origin remote_branch:new_branch
+</span></span><span class="line"><span class="cl">// 上面👆这两种方法都不会切换当前分支；
+</span></span><span class="line"><span class="cl">// 如果想要创建分支的同时，切换到新分支
+</span></span><span class="line"><span class="cl">git checkout -b new_branch origin/remote_branch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法三：（如果本地有远程分支 origin/name, 想拉取一个本地分支）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">// git默认将创建一个同名本地分支，并将本地分支和远程仓库关联
+</span></span><span class="line"><span class="cl">git checkout remote_branch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="远程分支不存在">远程分支不存在</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">//  如果远程仓库不存在new_remote_branch，将创建一个该分支，并关联local_branch
+</span></span><span class="line"><span class="cl">git push origin local_branch:new_remote_branch
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">yui</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-12-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/docker-commands/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Docker 命令大全</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/redis-%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">Redis 笔记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cc@kkon.cc" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/dsumuzhe" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/renchangjiu" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>yui</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

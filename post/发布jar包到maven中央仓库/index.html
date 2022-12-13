@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>发布 jar 包到 maven 中央仓库详细教程 - My Docs</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="yui" /><meta name="description" content="如何发布 jar 包到 maven 中央仓库详细教程 java 开发中没少用各种 jar 包，特别是使用 maven，gradle 构建工具，方便有效。总是只取不予，也应该懂得奉献，" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%8F%91%E5%B8%83jar%E5%8C%85%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="发布 jar 包到 maven 中央仓库详细教程" />
+<meta property="og:description" content="如何发布 jar 包到 maven 中央仓库详细教程 java 开发中没少用各种 jar 包，特别是使用 maven，gradle 构建工具，方便有效。总是只取不予，也应该懂得奉献，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%8F%91%E5%B8%83jar%E5%8C%85%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-08T14:16:10+08:00" />
+<meta property="article:modified_time" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="name" content="发布 jar 包到 maven 中央仓库详细教程">
+<meta itemprop="description" content="如何发布 jar 包到 maven 中央仓库详细教程 java 开发中没少用各种 jar 包，特别是使用 maven，gradle 构建工具，方便有效。总是只取不予，也应该懂得奉献，"><meta itemprop="datePublished" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="dateModified" content="2022-12-08T14:16:10+08:00" />
+<meta itemprop="wordCount" content="1402">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="发布 jar 包到 maven 中央仓库详细教程"/>
+<meta name="twitter:description" content="如何发布 jar 包到 maven 中央仓库详细教程 java 开发中没少用各种 jar 包，特别是使用 maven，gradle 构建工具，方便有效。总是只取不予，也应该懂得奉献，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">My Docs</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">My Docs</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">发布 jar 包到 maven 中央仓库详细教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-12-08 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何发布-jar-包到-maven-中央仓库详细教程">如何发布 jar 包到 maven 中央仓库详细教程</a>
+      <ul>
+        <li><a href="#一-注册-sonatype-帐号register-sonatype">一. 注册 sonatype 帐号(register sonatype)</a></li>
+        <li><a href="#二-创建工单nexus">二. 创建工单（nexus)</a></li>
+        <li><a href="#三-配置项目工程-pomxml">三. 配置项目工程 pom.xml</a></li>
+        <li><a href="#四-配置-maven-settingxml">四. 配置 Maven setting.xml</a></li>
+        <li><a href="#五-配置-gpg-key">五. 配置 gpg-key</a></li>
+        <li><a href="#六-deploy-部署">六. Deploy 部署</a></li>
+        <li><a href="#七-release-发行">七. Release 发行</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="如何发布-jar-包到-maven-中央仓库详细教程">如何发布 jar 包到 maven 中央仓库详细教程</h1>
+<p>java 开发中没少用各种 jar 包，特别是使用 maven，gradle 构建工具，方便有效。总是只取不予，也应该懂得奉献，当你写好了一个十分好用的 jar 包，想贡献出去给大家使用的时候，应该怎么做呢？当然是发布到 maven 的中央仓库了</p>
+<p><strong>开始要注意这个几个 Maven 相关地址</strong>：</p>
+<ul>
+<li><strong>工单管理</strong>：<a href="https://issues.sonatype.org/">https://issues.sonatype.org</a></li>
+</ul>
+<blockquote>
+<p>就是申请上传资格和 groupId 的地方,注册账号、创建和管理 issue，Jar 包的发布是以解决 issue 的方式起步的</p>
+</blockquote>
+<ul>
+<li><strong>构件仓库</strong> : <a href="https://oss.sonatype.org/#welcome">https://oss.sonatype.org/#welcome</a></li>
+</ul>
+<blockquote>
+<p>把 jar 包上传到这里，Release 之后就会同步到 maven 中央仓库。</p>
+</blockquote>
+<ul>
+<li><strong>仓库镜像</strong>: <a href="http://search.maven.org/">http://search.maven.org/</a></li>
+</ul>
+<blockquote>
+<p>最终工件可以在这里搜索到。</p>
+</blockquote>
+<h2 id="一-注册-sonatype-帐号register-sonatype">一. 注册 sonatype 帐号(register sonatype)</h2>
+<p>访问<a href="https://issues.sonatype.org/">Sonatype</a>，注册帐号</p>
+<h2 id="二-创建工单nexus">二. 创建工单（nexus)</h2>
+<p>点击 header 头 “create”按钮创建一个工单，主要用途注册你上传 jar 包基本信息，主要 groupid，通过审核有两个目的：1.防止重复，约束 groupid 规范，定义 grupid 最好有所属的域名</p>
+<p>比如：你申请 com.hippo 那么你最有有 hippo.com 这个域名的所有权。如果你不符合还有一个解决办法，groupid 申请以：com.github.{账号名来定义}</p>
+<p><img src="https://static.oschina.net/uploads/img/201712/27115346_dBwl.png" alt="创建"></p>
+<p>创建成功后，接下来等待后台管理员审核，一般一个工作日以内，当 Issue 的 Status 变为 RESOLVED 后，就可以进行下一步操作了，否则，就等待… <img src="https://static.oschina.net/uploads/img/201712/27120115_WJle.png" alt="输入图片说明"></p>
+<p>审批通过后，通常管理员会给你留言配置方法，大体文字如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Configuration has been prepared, now you can:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
+</span></span><span class="line"><span class="cl">Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
+</span></span><span class="line"><span class="cl">Promote staged artifacts into repository &#39;Releases&#39;......
+</span></span><span class="line"><span class="cl">please comment on this ticket when you promoted your first release, thanks
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="三-配置项目工程-pomxml">三. 配置项目工程 pom.xml</h2>
+<p>在工程的 pom.xml 文件中，引入 Sonatype 官方的一个通用配置 oss-parent，这样做的好处是很多 pom.xml 的发布配置不需要自己配置了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;parent&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;groupId&gt;</span>org.sonatype.oss<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>oss-parent<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;version&gt;</span>7<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/parent&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并增加 Licenses、SCM、Developers 信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;licenses&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;license&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;name&gt;</span>The Apache Software License, Version 2.0<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;url&gt;</span>http://www.apache.org/licenses/LICENSE-2.0.txt<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;distribution&gt;</span>repo<span class="nt">&lt;/distribution&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/license&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/licenses&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;scm&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;tag&gt;</span>master<span class="nt">&lt;/tag&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;url&gt;</span>git@github.com:cloudnil/marathon-client.git<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;connection&gt;</span>scm:git:git@github.com:cloudnil/marathon-client.git<span class="nt">&lt;/connection&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;developerConnection&gt;</span>scm:git:git@github.com:cloudnil/marathon-client.git<span class="nt">&lt;/developerConnection&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/scm&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;developers&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;developer&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;name&gt;</span>cloudnil<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;email&gt;</span>cloudnil@126.com<span class="nt">&lt;/email&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;organization&gt;</span>CloudNil<span class="nt">&lt;/organization&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/developer&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/developers&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="四-配置-maven-settingxml">四. 配置 Maven setting.xml</h2>
+<p>setting.xml 放在 Maven 安装文件/conf 目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;servers&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;server&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;id&gt;</span>sonatype-nexus-snapshots<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;username&gt;</span>Sonatype 账号<span class="nt">&lt;/username&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;password&gt;</span>Sonatype 密码<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/server&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;server&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;id&gt;</span>sonatype-nexus-staging<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;username&gt;</span>Sonatype 账号<span class="nt">&lt;/username&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;password&gt;</span>Sonatype 密码<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/server&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/servers&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五-配置-gpg-key">五. 配置 gpg-key</h2>
+<p>如果是使用的 windows,建议下载 git 客户端，可以在 git bash 提供窗口操作,在命令行中执行 <code>gpg --gen-key</code> 生成，过程中需要填写名字、邮箱等，其他步骤可以使用默认值，不过有个叫：Passphase 的参数需要记住，这个相当于是是密钥的密码，下一步发布过程中进行签名操作的时候会用到</p>
+<p><img src="https://static.oschina.net/uploads/img/201712/29102734_UxSx.png" alt="输入图片说明"></p>
+<h2 id="六-deploy-部署">六. Deploy 部署</h2>
+<p>这步就简单了，就是一套命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mvn clean deploy -P sonatype-oss-release -Darguments<span class="o">=</span><span class="s2">&#34;gpg.passphrase=密钥密码&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>默认启动：maven-javadoc-plugin 插件, 如果要忽略，可以跟参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">-D maven.javadoc.skip<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或在pom.xml 中加入参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">    <span class="nt">&lt;properties&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;maven.javadoc.skip&gt;</span>true<span class="nt">&lt;/maven.javadoc.skip&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/properties&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="七-release-发行">七. Release 发行</h2>
+<p>进入<a href="https://oss.sonatype.org/#stagingRepositories">Repositories</a>查看发布好的构件，点击左侧的 Staging Repositories, 一般最后一个就是刚刚发布的 jar 了，此时的构件状态为 open。 打开命令行窗口，查看 gpg key 并上传到第三方的 key 验证库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gpg --list-keys
+</span></span><span class="line"><span class="cl">---------------------------------------------
+</span></span><span class="line"><span class="cl">pub   2048R/824B4D7A 2016-01-06
+</span></span><span class="line"><span class="cl">uid       <span class="o">[</span>ultimate<span class="o">]</span> cloudnil &lt;cloudnil@126.com&gt;
+</span></span><span class="line"><span class="cl">sub   2048R/7A10AD69 2016-01-06
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ gpg --keyserver hkp://keyserver.ubuntu.com:11371 --send-keys 824B4D7A
+</span></span><span class="line"><span class="cl">---------------------------------------------
+</span></span><span class="line"><span class="cl">gpg: sending key 824B4D7A to hkp server keyserver.ubuntu.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://static.oschina.net/uploads/img/201712/29165622_9sZu.png" alt="输入图片说明"></p>
+<p>以上操作完成后, 回到<a href="https://oss.sonatype.org/#stagingRepositories">Repositories</a>, 选中刚才发布的构件，并点击上方的 close–&gt;Confirm，在下边的 Activity 选项卡中查看状态，当状态变成 closed 后，执行 Release–&gt;Confirm，并在下边的 Activity 选项卡中查看状态，成功后构件自动删除，一小段时间（约 1-2 个小时）后即可同步到 maven 的中央仓库。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">yui</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-12-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/code-segment/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">代码片段</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cc@kkon.cc" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/dsumuzhe" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/renchangjiu" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>yui</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
